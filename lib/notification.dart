@@ -50,7 +50,7 @@ class _LocalNotificationState extends State<LocalNotification> {
     //2x...
     else if (value == '2x/Day') {
       print(value);
-      var scheduleTime = DateTime.now().add(Duration(hours: 12));
+      var scheduleTime = DateTime.now().add(Duration(seconds: 12));
       flutterNotification.schedule(
           1,
           'Every 12 hours',
@@ -61,7 +61,7 @@ class _LocalNotificationState extends State<LocalNotification> {
     //3x...
     else if (value == '3x/Day') {
       print(value);
-      var scheduleTime = DateTime.now().add(Duration(hours: 6));
+      var scheduleTime = DateTime.now().add(Duration(seconds: 6));
       flutterNotification.schedule(
           2,
           'Every 6 hours',
@@ -72,7 +72,7 @@ class _LocalNotificationState extends State<LocalNotification> {
     //4x...
     else if (value == '4x/Day') {
       print(value);
-      var scheduleTime = DateTime.now().add(Duration(hours: 4));
+      var scheduleTime = DateTime.now().add(Duration(seconds: 4));
       flutterNotification.schedule(
           3,
           'Every 4 hours',
@@ -83,7 +83,7 @@ class _LocalNotificationState extends State<LocalNotification> {
     //48 Hours...
     else if (value == '48 Hours') {
       print(value);
-      var scheduleTime = DateTime.now().add(Duration(hours: 48));
+      var scheduleTime = DateTime.now().add(Duration(seconds: 48));
       flutterNotification.schedule(
           4,
           'Every 48 Hours',
