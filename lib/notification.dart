@@ -10,9 +10,16 @@ class _LocalNotificationState extends State<LocalNotification> {
   late FlutterLocalNotificationsPlugin flutterNotification;
   String value = "Daily";
 
-  var items = ["Daily", "2x/Day", "3x/Day", "4x/Day", '48 Hours'];
+  var items = ["Daily", "2x/Day", "3x/Day", "4x/Day", '48 seconds'];
 
-  var time = Time(20, 00, 00);
+  Time time = Time();
+
+  //TimePicker...
+
+  TimeOfDay _time = TimeOfDay.now();
+  Future<void> selectTime(BuildContext context) async {
+    _time = (await showTimePicker(context: context, initialTime: _time))!;
+  }
 
   @override
   void initState() {
@@ -41,54 +48,63 @@ class _LocalNotificationState extends State<LocalNotification> {
 
     flutterNotification.show(
         0, "Main Notification", "Completing Tasks", generalNotificationDetails);
+
     //Daily...
     if (value == 'Daily') {
       print(value);
       flutterNotification.showDailyAtTime(1, 'Daily Notification',
           'This is Daily Notification', time, generalNotificationDetails);
     }
+
     //2x...
     else if (value == '2x/Day') {
       print(value);
-      var scheduleTime = DateTime.now().add(Duration(hours: 12));
+      var sT = DateTime.now();
+      var a = DateTime(sT.year, sT.month, sT.day, _time.hour, _time.minute);
       flutterNotification.schedule(
           1,
-          'Every 12 hours',
-          'This is every 12 hours notification',
-          scheduleTime,
+          'Notification Set',
+          'Notification set to: ${a.hour}:${a.minute}',
+          a,
           generalNotificationDetails);
     }
+
     //3x...
     else if (value == '3x/Day') {
       print(value);
-      var scheduleTime = DateTime.now().add(Duration(hours: 6));
+      var sT = DateTime.now();
+      var a = DateTime(sT.year, sT.month, sT.day, _time.hour, _time.minute);
       flutterNotification.schedule(
           2,
-          'Every 6 hours',
-          'This is every 6 hours notification',
-          scheduleTime,
+          'Notification Set',
+          'Notification set to: ${a.hour}:${a.minute}',
+          a,
           generalNotificationDetails);
     }
+
     //4x...
     else if (value == '4x/Day') {
       print(value);
-      var scheduleTime = DateTime.now().add(Duration(hours: 4));
+      var sT = DateTime.now();
+      var a = DateTime(sT.year, sT.month, sT.day, _time.hour, _time.minute);
       flutterNotification.schedule(
           3,
-          'Every 4 hours',
-          'This is every 4 hours notification',
-          scheduleTime,
+          'Notification Set',
+          'Notification set to: ${a.hour}:${a.minute}',
+          a,
           generalNotificationDetails);
     }
+
     //48 Hours...
     else if (value == '48 Hours') {
       print(value);
-      var scheduleTime = DateTime.now().add(Duration(hours: 48));
+      var sT = DateTime.now();
+      var a = DateTime(sT.year, sT.month, sT.day, _time.hour, _time.minute);
       flutterNotification.schedule(
           4,
-          'Every 48 Hours',
-          'This is every 48 Hours notification',
-          scheduleTime,
+          'Notification Set',
+          'Notification set to: ${a.hour}:${a.minute}',
+          a,
           generalNotificationDetails);
     }
   }
@@ -114,6 +130,11 @@ class _LocalNotificationState extends State<LocalNotification> {
                   value = newValue!;
                 });
               },
+            ),
+            SizedBox(height: 15),
+            TextButton(
+              child: Text('Set Time'),
+              onPressed: () => selectTime(context),
             ),
             TextButton(
               child: Text('Set notification'),
